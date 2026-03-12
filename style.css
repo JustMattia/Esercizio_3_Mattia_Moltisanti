@@ -1,3 +1,6 @@
+/* ==============================
+   FONTS & BASE
+   ============================== */
 @font-face {
   font-family: "Lostar";
   src: url("fonts/Lostar.ttf") format("truetype");
@@ -17,81 +20,196 @@ html {
 body {
   margin: 0;
   font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    "Fira Sans",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   background-color: #1a1a1a;
 }
 
 h1,
 h2,
 h3,
-p {
+p,
+ul {
   margin: 0;
   padding: 0;
 }
 a {
   color: inherit;
   text-decoration: none;
+  transition: text-decoration 0.3s ease;
 }
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
+ul {
+  list-style-type: none;
+}
 
+/* ==============================
+   HEADER (Shared & Layout)
+   ============================== */
 header {
   position: relative;
   width: 100%;
 }
 
-header img {
+/* Loghi interattivi (cursore a manina e transizione) */
+header h1,
+.site-footer h1 {
+  font-family: "Lostar", serif;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-menu {
+  display: flex;
+  z-index: 2;
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s ease;
+}
+.nav-menu a {
+  font-weight: 500;
+  position: relative; /* Necessario per la sottolineatura animata */
+}
+
+/* --- Effetto sottolineatura su hover per TUTTI i link nav --- */
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+.nav-menu a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* --- Header Home (Hero) --- */
+.header-hero img {
   width: 100%;
   height: 400px;
   object-fit: cover;
   object-position: center;
 }
-
-header h1 {
-  font-family: "Lostar", serif;
+.header-hero h1 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); /* Centramento iniziale */
   color: #ffffff;
   font-size: 7vw;
   font-weight: 200;
   text-shadow: 0px 5px 8px rgba(0, 0, 0, 1);
   z-index: 2;
 }
+/* Ingrandimento Logo Home (combina translate e scale) */
+.header-hero h1:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+}
 
-header ul {
+.header-hero .nav-menu {
   position: absolute;
   top: 32px;
   right: 50px;
-  list-style-type: none;
-  display: flex;
   gap: 32px;
-  margin: 0;
-  padding: 0;
-  z-index: 2;
 }
-
-header ul li a {
+.header-hero .nav-menu a {
   color: #ffffff;
-  font-family: sans-serif;
   font-size: 1vw;
-  font-weight: 500;
   text-shadow: 0px 5px 8px rgba(0, 0, 0, 1);
 }
 
-main {
-  padding: 50px 20px;
+/* --- Header Province (Slim) --- */
+.header-slim {
+  height: 80px;
+  background-color: #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+.header-slim h1 {
+  font-size: 40px;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+/* Ingrandimento Logo Slim */
+.header-slim h1:hover {
+  transform: scale(1.05);
 }
 
+.header-slim .nav-menu {
+  gap: 40px;
+  position: static;
+}
+.header-slim .nav-menu a {
+  color: #1a1a1a;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* ==============================
+   MENU TOGGLE & HAMBURGER
+   ============================== */
+#menu-toggle {
+  display: none;
+}
+
+.hamburger {
+  display: none;
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 10000; /* Alzato per essere sempre in primissimo piano */
+}
+.header-hero .hamburger {
+  color: #ffffff;
+  text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.8);
+}
+.header-slim .hamburger {
+  color: #1a1a1a;
+}
+
+#menu-toggle:checked ~ .hamburger {
+  color: #ffffff;
+  text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* ==============================
+   MAIN CONTENT
+   ============================== */
+main {
+  padding: 50px 20px 0 20px;
+}
 main section {
   max-width: 1600px;
   margin: 0 auto;
 }
-
 main section + section {
   margin-top: 60px;
 }
@@ -103,72 +221,89 @@ section h2 {
   font-weight: 700;
   margin-bottom: 25px;
 }
-
 section h2 span {
   text-decoration: underline;
   text-decoration-thickness: 3px;
   text-underline-offset: 6px;
 }
 
-.piazze-grid {
+/* --- Grids & Cards (Shared) --- */
+.piazze-grid,
+.province-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
+.piazze-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+.province-grid {
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 50px;
+}
 
-.card {
+.card,
+.prov-card {
   background-color: #ffffff;
-  border-radius: 8px;
   overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.card h3,
+.prov-card h3 {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 800;
+  color: #000000;
+}
+.card span,
+.prov-card span {
+  font-weight: 700;
+}
+
+/* --- Specifiche Piazze --- */
+.card {
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
 }
-
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
 .card img {
   aspect-ratio: 16 / 9;
   object-fit: cover;
 }
-
 .card footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
 }
-
 .card h3 {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 800;
   font-size: 24px;
-  color: #000000;
 }
-
 .card span {
-  font-family: sans-serif;
-  font-weight: 700;
   font-size: 20px;
   color: #666666;
   text-transform: uppercase;
 }
 
-.province-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
+/* --- Specifiche Province --- */
 .prov-card {
-  background-color: #ffffff;
   border-radius: 12px;
-  overflow: hidden;
   display: flex;
 }
-
+.prov-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
 .prov-card img {
   width: 40%;
   object-fit: cover;
 }
-
 .prov-card > div {
   width: 60%;
   padding: 30px;
@@ -176,43 +311,122 @@ section h2 span {
   flex-direction: column;
   justify-content: center;
 }
-
 .prov-card h3 {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 800;
   font-size: 32px;
-  color: #000000;
   margin-bottom: 5px;
 }
-
 .prov-card span {
-  font-family: sans-serif;
-  font-weight: 700;
   font-size: 24px;
   color: #888888;
   margin-bottom: 30px;
+  display: block;
 }
-
 .prov-card p {
-  font-family: sans-serif;
-  font-weight: 700;
   font-size: 20px;
   color: #555555;
   line-height: 1.4;
+  font-weight: 700;
 }
 
-body > footer {
+/* ==============================
+   FOOTER
+   ============================== */
+.site-footer {
   position: relative;
   width: 100%;
   min-height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 0;
   overflow: hidden;
 }
+.site-footer > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+.site-footer > div {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+.site-footer h1 {
+  font-family: "Lostar", serif;
+  color: #ffffff;
+  font-size: 2vw;
+  font-weight: normal;
+  text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.8);
+}
+.site-footer h1:hover {
+  transform: scale(1.05);
+}
 
-body > footer > img {
+.site-footer ul {
+  display: flex;
+  gap: 50px;
+}
+.site-footer ul li a {
+  position: relative;
+  color: #ffffff;
+  font-family: "Fira Sans", sans-serif;
+  font-size: 1vw;
+  font-weight: 500;
+}
+.site-footer p {
+  color: #bbbbbb;
+  font-size: 16px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.site-footer ul li a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: #ffffff;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+.site-footer ul li a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* ==============================
+   PAGINA PROVINCE (Lista alternata)
+   ============================== */
+
+/* Hero Province a tutto schermo */
+.hero-province {
+  position: relative;
+  width: 100vw; /* Prende il 100% della larghezza dello schermo */
+  max-width: none; /* Annulla i limiti del contenitore main */
+  left: 50%; /* Lo spinge a metà schermo */
+  transform: translateX(
+    -50%
+  ); /* Lo ricentra perfettamente annullando i margini */
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-top: -50px; /* Compensa lo spazio vuoto in alto */
+}
+
+.hero-province img {
   position: absolute;
   top: 0;
   left: 0;
@@ -222,111 +436,203 @@ body > footer > img {
   z-index: 1;
 }
 
-body > footer > div {
+.hero-province h2 {
   position: relative;
   z-index: 2;
+  font-family: "Fira Sans", sans-serif;
+  font-size: 4vw;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.9);
+  margin: 0;
+}
+
+/* Lista Layout ristretta a 1200px */
+.province-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 20px 20px;
-}
-
-body > footer h1 {
-  font-family: "Lostar", serif;
-  color: #ffffff;
-  font-size: 2vw;
-  font-weight: normal;
-  text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.8);
-}
-
-body > footer ul {
-  list-style-type: none;
-  display: flex;
-  gap: 50px;
-  margin: 0;
+  gap: 0; /* RIMOSSO: Usiamo il padding interno per far toccare le fasce di sfondo */
   padding: 0;
+  max-width: 1200px !important;
+  margin: 0 auto;
 }
 
-body > footer ul li a {
-  color: #ffffff;
-  font-family: "Fira Sans", sans-serif;
-  font-size: 1vw;
-  font-weight: 500;
+.prov-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 20px; /* AGGIUNTO: Spazio interno alla riga */
+  position: relative; /* FONDAMENTALE per il trucco dello sfondo */
 }
 
-body > footer p {
-  color: #bbbbbb;
-  font-family: sans-serif;
-  font-size: 16px;
-  margin-top: 15px;
-  margin-bottom: 5px;
-}
-
-#menu-toggle {
-  display: none;
-}
-
-.hamburger {
-  display: none;
-  color: #ffffff;
-  font-size: 30px;
+/* MAGIA: Sfondo alternato a tutto schermo (100vw) */
+.prov-row:nth-child(odd)::before {
+  content: "";
   position: absolute;
-  top: 50%;
-  right: 30px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  z-index: 10;
-  text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.8);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  background-color: #262626; /* Grigio leggermente più chiaro del #1a1a1a */
+  z-index: -1;
 }
 
-@media (max-width: 768px) {
-  header h1 {
-    font-size: 12vw;
-  }
+/* Inverte le righe pari (2, 4, 6...) */
+.prov-row:nth-child(even) {
+  flex-direction: row-reverse;
+}
 
+/* Allinea il testo a destra nelle righe pari */
+.prov-row:nth-child(even) .prov-text {
+  text-align: right;
+}
+
+.prov-row img {
+  width: 45%;
+  border-radius: 6px;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Transizione per hover */
+  position: relative;
+  z-index: 2; /* Tiene l'immagine sopra allo sfondo */
+  cursor: pointer;
+}
+
+/* AGGIUNTO: Ingrandimento immagine mappa su Hover */
+.prov-row img:hover {
+  transform: scale(1.05); /* Zoom del 5% */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6); /* Ombra morbida */
+}
+
+.prov-row .prov-text {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.prov-row .prov-text h2 {
+  font-size: 40px;
+  color: #ffffff;
+  margin-bottom: 0;
+  text-decoration: none;
+  position: relative; /* Necessario per l'animazione della riga */
+  width: fit-content; /* La larghezza si adatta alla parola (evita righe lunghissime) */
+  cursor: pointer; /* Cursore a "manina" al passaggio */
+}
+
+.prov-row:nth-child(even) .prov-text h2 {
+  align-self: flex-end;
+}
+
+/* --- MAGIA: Animazione sottolineatura sui titoli Province --- */
+.prov-row .prov-text h2::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px; /* Lievemente più spessa (3px) perché il font è grande */
+  bottom: -2px; /* Posizionata sotto la scritta */
+  left: 0;
+  background-color: currentColor; /* Prende in automatico il bianco del testo */
+  transform: scaleX(0); /* Parte invisibile (scala zero) */
+  transform-origin: bottom right;
+  transition: transform 0.3s ease; /* Transizione fluida */
+}
+
+.prov-row .prov-text h2:hover::after {
+  transform: scaleX(1); /* Diventa visibile al 100% */
+  transform-origin: bottom left; /* Effetto comparsa da sinistra a destra */
+}
+
+.prov-row .prov-text h3 {
+  font-family: "Fira Sans", sans-serif;
+  font-size: 20px;
+  color: #888888;
+  font-weight: 600;
+}
+
+.prov-row .prov-text p {
+  font-size: 18px;
+  color: #bbbbbb;
+  line-height: 1.6;
+}
+
+/* Stile per il nome della città (tag <b>) nella pagina piazze */
+.prov-row .prov-text b {
+  color: #ffffff;
+  font-size: 26px;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 700;
+}
+
+/* ==============================
+   MEDIA QUERIES (Mobile)
+   ============================== */
+@media (max-width: 768px) {
   .hamburger {
     display: block;
   }
 
-  header ul {
+  /* IL FIX È QUI: Sovrascriviamo le classi desktop in modo specifico */
+  .header-hero .nav-menu,
+  .header-slim .nav-menu {
     display: none;
+    opacity: 0;
+    visibility: hidden;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
+    right: auto;
+    bottom: auto; /* Annulla le posizioni desktop */
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0);
-    z-index: 5;
-    gap: 2vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    gap: 6vw;
+    margin: 0;
+    padding: 0;
   }
 
-  #menu-toggle:checked ~ ul {
-    display: flex;
+  #menu-toggle:checked ~ .nav-menu {
+    display: flex !important;
+    opacity: 1;
+    visibility: visible;
   }
 
-  header ul li a {
+  .header-hero .nav-menu a,
+  .header-slim .nav-menu a {
     font-size: 6vw;
     padding: 10px;
     display: block;
+    color: #ffffff;
+    font-weight: 500;
+    text-shadow: none;
   }
 
-  header img {
+  .header-hero .nav-menu a::after,
+  .header-slim .nav-menu a::after {
+    display: none;
+  }
+
+  /* Header Home */
+  .header-hero h1 {
+    font-size: 12vw;
+  }
+  .header-hero img {
     height: 150px;
   }
 
+  /* Main & Cards */
   section h2 {
     font-size: 6vw;
   }
-  .piazze-grid {
-    grid-template-columns: auto;
-  }
-
+  .piazze-grid,
   .province-grid {
-    grid-template-columns: auto;
+    grid-template-columns: 1fr;
   }
   .prov-card h3 {
     font-size: 6vw;
@@ -341,22 +647,77 @@ body > footer p {
   .prov-card > div {
     padding: 20px;
   }
-  body > footer h1 {
+
+  .card:hover,
+  .prov-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .header-hero h1:hover {
+    transform: translate(-50%, -50%);
+  }
+  .header-slim h1:hover,
+  .site-footer h1:hover {
+    transform: none;
+  }
+
+  /* Footer */
+  .site-footer h1 {
     font-size: 10vw;
   }
-
-  body > footer ul {
+  .site-footer ul {
     gap: 30px;
   }
-
-  body > footer ul li a {
+  .site-footer ul li a {
     font-size: 5vw;
   }
-
-  body > footer p {
+  .site-footer ul li a::after {
+    display: none;
+  }
+  .site-footer p {
     font-size: 14px;
     text-align: center;
     line-height: 1.4;
     padding: 0 10px;
+  }
+
+  .hero-province {
+    height: 150px;
+  }
+  .hero-province h2 {
+    font-size: 10vw;
+  }
+
+  .province-list {
+    gap: 0; /* Assicurati che il gap sia 0 anche qui */
+  }
+
+  .prov-row,
+  .prov-row:nth-child(even) {
+    flex-direction: column;
+    text-align: left;
+    gap: 20px;
+    padding: 50px 20px; /* Mantiene lo sfondo anche su mobile */
+  }
+
+  .prov-row:nth-child(even) .prov-text {
+    text-align: left;
+  }
+
+  .prov-row img,
+  .prov-row .prov-text {
+    width: 100%;
+  }
+
+  .prov-row img:hover {
+    transform: none; /* Disabilita lo zoom sui dispositivi touch */
+    box-shadow: none;
+  }
+
+  .prov-row .prov-text h2 {
+    font-size: 32px;
+  }
+  .prov-row .prov-text h3 {
+    font-size: 16px;
   }
 }
