@@ -717,6 +717,10 @@ section h2 span {
   .prov-row .prov-text h2 {
     font-size: 32px;
   }
+  /* Forza tutti gli h2 a sinistra su mobile (sovrascrive il flex-end delle righe pari) */
+  .prov-row:nth-child(even) .prov-text h2 {
+    align-self: flex-start;
+  }
   .prov-row .prov-text h3 {
     font-size: 16px;
   }
