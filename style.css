@@ -1,6 +1,3 @@
-/* ==============================
-   FONTS & BASE
-   ============================== */
 @font-face {
   font-family: "Lostar";
   src: url("fonts/Lostar.ttf") format("truetype");
@@ -58,15 +55,11 @@ ul {
   list-style-type: none;
 }
 
-/* ==============================
-   HEADER (Shared & Layout)
-   ============================== */
 header {
   position: relative;
   width: 100%;
 }
 
-/* Loghi interattivi (cursore a manina e transizione) */
 header h1,
 .site-footer h1 {
   font-family: "Lostar", serif;
@@ -83,10 +76,9 @@ header h1,
 }
 .nav-menu a {
   font-weight: 500;
-  position: relative; /* Necessario per la sottolineatura animata */
+  position: relative;
 }
 
-/* --- Effetto sottolineatura su hover per TUTTI i link nav --- */
 .nav-menu a::after {
   content: "";
   position: absolute;
@@ -104,7 +96,6 @@ header h1,
   transform-origin: bottom left;
 }
 
-/* --- Header Home (Hero) --- */
 .header-hero img {
   width: 100%;
   height: 400px;
@@ -115,14 +106,13 @@ header h1,
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centramento iniziale */
+  transform: translate(-50%, -50%);
   color: #ffffff;
   font-size: 7vw;
   font-weight: 200;
   text-shadow: 0px 5px 8px rgba(0, 0, 0, 1);
   z-index: 2;
 }
-/* Ingrandimento Logo Home (combina translate e scale) */
 .header-hero h1:hover {
   transform: translate(-50%, -50%) scale(1.05);
 }
@@ -139,7 +129,6 @@ header h1,
   text-shadow: 0px 5px 8px rgba(0, 0, 0, 1);
 }
 
-/* --- Header Province (Slim) --- */
 .header-slim {
   height: 80px;
   background-color: #e5e5e5;
@@ -156,7 +145,6 @@ header h1,
   color: #1a1a1a;
   font-weight: 500;
 }
-/* Ingrandimento Logo Slim */
 .header-slim h1:hover {
   transform: scale(1.05);
 }
@@ -171,9 +159,6 @@ header h1,
   font-weight: 600;
 }
 
-/* ==============================
-   MENU TOGGLE & HAMBURGER
-   ============================== */
 #menu-toggle {
   display: none;
 }
@@ -186,7 +171,7 @@ header h1,
   right: 30px;
   transform: translateY(-50%);
   cursor: pointer;
-  z-index: 10000; /* Alzato per essere sempre in primissimo piano */
+  z-index: 10000;
 }
 .header-hero .hamburger {
   color: #ffffff;
@@ -201,9 +186,6 @@ header h1,
   text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.8);
 }
 
-/* ==============================
-   MAIN CONTENT
-   ============================== */
 main {
   padding: 50px 20px 0 20px;
 }
@@ -228,7 +210,6 @@ section h2 span {
   text-underline-offset: 6px;
 }
 
-/* --- Grids & Cards (Shared) --- */
 .piazze-grid,
 .province-grid {
   display: grid;
@@ -261,7 +242,6 @@ section h2 span {
   font-weight: 700;
 }
 
-/* --- Specifiche Piazze --- */
 .card {
   border-radius: 8px;
   display: flex;
@@ -292,7 +272,6 @@ section h2 span {
   text-transform: uppercase;
 }
 
-/* --- Specifiche Province --- */
 .prov-card {
   border-radius: 12px;
   display: flex;
@@ -330,9 +309,6 @@ section h2 span {
   font-weight: 700;
 }
 
-/* ==============================
-   FOOTER
-   ============================== */
 .site-footer {
   position: relative;
   width: 100%;
@@ -407,25 +383,18 @@ section h2 span {
   transform-origin: bottom left;
 }
 
-/* ==============================
-   PAGINA PROVINCE (Lista alternata)
-   ============================== */
-
-/* Hero Province a tutto schermo */
 .hero-province {
   position: relative;
-  width: 100vw; /* Prende il 100% della larghezza dello schermo */
-  max-width: none; /* Annulla i limiti del contenitore main */
-  left: 50%; /* Lo spinge a metà schermo */
-  transform: translateX(
-    -50%
-  ); /* Lo ricentra perfettamente annullando i margini */
+  width: 100vw;
+  max-width: none;
+  left: 50%;
+  transform: translateX(-50%);
   height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  margin-top: -50px; /* Compensa lo spazio vuoto in alto */
+  margin-top: -50px;
 }
 
 .hero-province img {
@@ -449,11 +418,10 @@ section h2 span {
   margin: 0;
 }
 
-/* Lista Layout ristretta a 1200px */
 .province-list {
   display: flex;
   flex-direction: column;
-  gap: 0; /* RIMOSSO: Usiamo il padding interno per far toccare le fasce di sfondo */
+  gap: 0;
   padding: 0;
   max-width: 1200px !important;
   margin: 0 auto;
@@ -463,11 +431,10 @@ section h2 span {
   display: flex;
   align-items: center;
   gap: 40px;
-  padding: 60px 20px; /* AGGIUNTO: Spazio interno alla riga */
-  position: relative; /* FONDAMENTALE per il trucco dello sfondo */
+  padding: 60px 20px;
+  position: relative;
 }
 
-/* MAGIA: Sfondo alternato a tutto schermo (100vw) */
 .prov-row:nth-child(odd)::before {
   content: "";
   position: absolute;
@@ -476,16 +443,14 @@ section h2 span {
   left: 50%;
   transform: translateX(-50%);
   width: 100vw;
-  background-color: #262626; /* Grigio leggermente più chiaro del #1a1a1a */
+  background-color: #262626;
   z-index: -1;
 }
 
-/* Inverte le righe pari (2, 4, 6...) */
 .prov-row:nth-child(even) {
   flex-direction: row-reverse;
 }
 
-/* Allinea il testo a destra nelle righe pari */
 .prov-row:nth-child(even) .prov-text {
   text-align: right;
 }
@@ -495,16 +460,15 @@ section h2 span {
   border-radius: 6px;
   transition:
     transform 0.3s ease,
-    box-shadow 0.3s ease; /* Transizione per hover */
+    box-shadow 0.3s ease;
   position: relative;
-  z-index: 2; /* Tiene l'immagine sopra allo sfondo */
+  z-index: 2;
   cursor: pointer;
 }
 
-/* AGGIUNTO: Ingrandimento immagine mappa su Hover */
 .prov-row img:hover {
-  transform: scale(1.05); /* Zoom del 5% */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6); /* Ombra morbida */
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
 }
 
 .prov-row .prov-text {
@@ -519,32 +483,31 @@ section h2 span {
   color: #ffffff;
   margin-bottom: 0;
   text-decoration: none;
-  position: relative; /* Necessario per l'animazione della riga */
-  width: fit-content; /* La larghezza si adatta alla parola (evita righe lunghissime) */
-  cursor: pointer; /* Cursore a "manina" al passaggio */
+  position: relative;
+  width: fit-content;
+  cursor: pointer;
 }
 
 .prov-row:nth-child(even) .prov-text h2 {
   align-self: flex-end;
 }
 
-/* --- MAGIA: Animazione sottolineatura sui titoli Province --- */
 .prov-row .prov-text h2::after {
   content: "";
   position: absolute;
   width: 100%;
-  height: 3px; /* Lievemente più spessa (3px) perché il font è grande */
-  bottom: -2px; /* Posizionata sotto la scritta */
+  height: 3px;
+  bottom: -2px;
   left: 0;
-  background-color: currentColor; /* Prende in automatico il bianco del testo */
-  transform: scaleX(0); /* Parte invisibile (scala zero) */
+  background-color: currentColor;
+  transform: scaleX(0);
   transform-origin: bottom right;
-  transition: transform 0.3s ease; /* Transizione fluida */
+  transition: transform 0.3s ease;
 }
 
 .prov-row .prov-text h2:hover::after {
-  transform: scaleX(1); /* Diventa visibile al 100% */
-  transform-origin: bottom left; /* Effetto comparsa da sinistra a destra */
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
 .prov-row .prov-text h3 {
@@ -560,7 +523,6 @@ section h2 span {
   line-height: 1.6;
 }
 
-/* Stile per il nome della città (tag <b>) nella pagina piazze */
 .prov-row .prov-text b {
   color: #ffffff;
   font-size: 26px;
@@ -568,18 +530,13 @@ section h2 span {
   font-weight: 700;
 }
 
-/* ==============================
-   TEMPLATE PAGINA SINGOLA
-   ============================== */
-
-/* Hero Piazza Singola (Testo centrato su 2 righe) */
 .hero-piazza {
   position: relative;
   width: 100vw;
   max-width: none;
   left: 50%;
   transform: translateX(-50%);
-  height: 350px; /* Un po' più alto per far respirare i due testi */
+  height: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -607,7 +564,6 @@ section h2 span {
   gap: 5px;
 }
 
-/* Ingrandimento al passaggio del mouse solo sul titolo principale */
 .hero-piazza h1 {
   font-family: "Fira Sans", sans-serif;
   font-size: 5vw;
@@ -626,13 +582,12 @@ section h2 span {
   font-family: "Fira Sans", sans-serif;
   font-size: 2vw;
   font-weight: 600;
-  color: #cccccc; /* Grigio chiaro come nello screenshot */
+  color: #cccccc;
   text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.9);
   margin: 0;
   text-transform: uppercase;
 }
 
-/* Testo introduttivo della pagina */
 .intro-piazza {
   max-width: 900px;
   margin: 30px auto 40px auto;
@@ -643,15 +598,11 @@ section h2 span {
   padding: 0 20px;
 }
 
-/* ==============================
-   MEDIA QUERIES (Mobile)
-   ============================== */
 @media (max-width: 768px) {
   .hamburger {
     display: block;
   }
 
-  /* IL FIX È QUI: Sovrascriviamo le classi desktop in modo specifico */
   .header-hero .nav-menu,
   .header-slim .nav-menu {
     display: none;
@@ -664,7 +615,7 @@ section h2 span {
     top: 0;
     left: 0;
     right: auto;
-    bottom: auto; /* Annulla le posizioni desktop */
+    bottom: auto;
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.95);
@@ -695,7 +646,6 @@ section h2 span {
     display: none;
   }
 
-  /* Header Home */
   .header-hero h1 {
     font-size: 12vw;
   }
@@ -703,7 +653,6 @@ section h2 span {
     height: 150px;
   }
 
-  /* Main & Cards */
   section h2 {
     font-size: 6vw;
   }
@@ -738,7 +687,6 @@ section h2 span {
     transform: none;
   }
 
-  /* Footer */
   .site-footer h1 {
     font-size: 10vw;
   }
@@ -766,7 +714,7 @@ section h2 span {
   }
 
   .province-list {
-    gap: 0; /* Assicurati che il gap sia 0 anche qui */
+    gap: 0;
   }
 
   .prov-row,
@@ -774,7 +722,7 @@ section h2 span {
     flex-direction: column;
     text-align: left;
     gap: 20px;
-    padding: 50px 20px; /* Mantiene lo sfondo anche su mobile */
+    padding: 50px 20px;
   }
 
   .prov-row:nth-child(even) .prov-text {
@@ -787,21 +735,19 @@ section h2 span {
   }
 
   .prov-row img:hover {
-    transform: none; /* Disabilita lo zoom sui dispositivi touch */
+    transform: none;
     box-shadow: none;
   }
 
   .prov-row .prov-text h2 {
     font-size: 32px;
   }
-  /* Forza tutti gli h2 a sinistra su mobile (sovrascrive il flex-end delle righe pari) */
   .prov-row:nth-child(even) .prov-text h2 {
     align-self: flex-start;
   }
   .prov-row .prov-text h3 {
     font-size: 16px;
   }
-  /* --- Template Singola Piazza Mobile --- */
   .hero-piazza {
     height: 200px;
   }
@@ -817,11 +763,7 @@ section h2 span {
   }
 }
 
-/* ==============================
-   MEDIA QUERIES (Tablet)
-   ============================== */
 @media (min-width: 726px) and (max-width: 1200px) {
-  /* --- Attivazione Menu Hamburger --- */
   .hamburger {
     display: block;
   }
@@ -843,11 +785,10 @@ section h2 span {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.95);
     z-index: 9999;
-    gap: 40px; /* Spazio tra i link nel menu aperto */
+    gap: 40px;
     margin: 0;
     padding: 0;
   }
-  /* Header Home */
   .header-hero h1 {
     font-size: 12vw;
   }
@@ -861,7 +802,7 @@ section h2 span {
   }
   .header-hero .nav-menu a,
   .header-slim .nav-menu a {
-    font-size: 40px; /* Testo bello grande per i tablet */
+    font-size: 40px;
     padding: 10px;
     display: block;
     color: #ffffff;
@@ -871,10 +812,9 @@ section h2 span {
 
   .header-hero .nav-menu a::after,
   .header-slim .nav-menu a::after {
-    display: none; /* Rimuove la riga di sottolineatura animata nel menu mobile */
+    display: none;
   }
 
-  /* --- Home: Griglie --- */
   .piazze-grid {
     grid-template-columns: 1fr;
   }
@@ -893,7 +833,6 @@ section h2 span {
     font-size: 16px;
   }
 
-  /* --- Pagine Piazze/Province: Liste alternate --- */
   .prov-row {
     gap: 30px;
     padding: 50px 20px;
@@ -917,7 +856,6 @@ section h2 span {
   .hero-piazza h2 {
     font-size: 5vw;
   }
-  /* Footer */
   .site-footer h1 {
     font-size: 7vw;
   }
